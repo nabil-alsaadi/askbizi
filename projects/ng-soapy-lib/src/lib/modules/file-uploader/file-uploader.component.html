@@ -1,0 +1,12 @@
+<input
+  class="d-none"
+  #fileInput
+  type="file"
+  (change)="handleFileUploaderChanged($event)"
+  [multiple]="multiple"
+  [disabled]="disabled"
+  [accept]="accept"
+/>
+
+<button (click)="openFileSelectorDialog($event)">select file</button>
+<button type="button" (click)="debug()">Debug</button>

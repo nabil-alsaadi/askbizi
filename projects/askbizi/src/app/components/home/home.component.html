@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Agency - Start Bootstrap Theme</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="../../../favicon.ico">
+        <!-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <!-- <link href="css/styles.css" rel="stylesheet" /> overflow: hidden; padding-right: 0px; -->
+    </head>
+    <body id="page-top" [ngClass]="bsModalShow ? 'modal-open' : 'v' ">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img style="object-fit: contain;height: 60px;" src="assets/img/logowhite.png" alt="..." /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        
+                        <li class="nav-item" offset="100"><a class="nav-link" href="#services">Business Set-Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">Business Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#inquiry">Inquiry</a></li>
+                        
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <img style="object-fit: contain;margin-bottom: 40px;max-width: 25%;" src="assets/img/logowhite2.png" alt="..." />
+                <!-- <div class="masthead-subheading" style="font-weight: bolder;">Welcome To AskBizi!</div> -->
+                <h3>Unlock the Gateway to Success</h3>
+                <h3 style="margin-bottom: 50px;">Your Business Set-Up is Just a Click Away!</h3>
+                <a class="btn btn-primary btn-xl text-uppercase" style="margin: 20px; width: 300px;" href="#services">Tell Me More</a>
+                <a class="btn btn-success btn-xl text-uppercase" style="margin: 20px;width: 300px;" href="https://wa.me/+971555625260?text=I%27m%20interested%20in%20your%20services%2C%20can%20you%20help%20me%20to%20get%20started">WhatsApp Inquiry</a>
+            </div>
+        </header>
+
+        <!-- Services-->
+        <section class="page-section bg-light bg image2" id="services">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Business Set-Up</h2>
+                    <h3 class="section-subheading">AskBizi offers a wide range of services to help business set-up of all sizes including</h3>
+                </div>
+                <div class="row" *ngIf="businessSetup$.value as businessSetup">
+                    <div *ngFor="let service of businessSetup" class="col-lg-4 col-sm-6 mb-4">
+                        <!-- Portfolio item 1-->
+                        <div class="portfolio-item">
+                            <!-- href="#bsetup{{service.uid}}" -->
+                            <a class="portfolio-link" data-bs-toggle="modal" (click)="openPopup(service)" href="">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" style="display: block;
+                                margin-left: auto;
+                                margin-right: auto;
+                                width: 50%;padding:20px"  src="{{service.icon}}" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">{{service.name}}</div>
+                                <div [innerHTML]="service.desc?.substring(0,45) + '...'">...</div>
+                                <!-- <div class="portfolio-caption-subheading text-muted" style="text-overflow: clip;white-space: nowrap;overflow: hidden;">{{service.desc?.substring(0,45)}}...</div> -->
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Grid-->
+        <section class="page-section" id="portfolio" style="background-color: color(srgb 0.695 0.1112 0.2405 / 0.1)" >
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Business Services</h2>
+                    <h3 class="section-subheading">AskBizi offers a wide range of services to help business Services of all sizes including</h3>
+                </div>
+                <div class="row" *ngIf="businessServices$.value as businessServices">
+                    <div *ngFor="let service of businessServices" class="col-lg-4 col-sm-6 mb-4">
+                        <!-- Portfolio item 1-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" (click)="openPopup(service)" href="">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" style="display: block;
+                                margin-left: auto;
+                                margin-right: auto;
+                                width: 50%;padding:20px"  src="{{service.icon}}" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">{{service.name}}</div>
+                                <div [innerHTML]="service.desc?.substring(0,45) + '...'">...</div>
+                                <!-- <div class="portfolio-caption-subheading text-muted" style="text-overflow: clip;white-space: nowrap;overflow: hidden;">{{service.desc?.substring(0,45)}}...</div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section bg image1" id="inquiry">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Inquiry Form</h2>
+                    <h3 class="section-subheading text-white">If you are looking for a reliable and experienced business setup and consultancy company in Dubai, AskBizi team is one call or one click away and we are ready to help you get your business up and running quickly and efficiently.</h3>
+                </div>
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- * * SB Forms Contact Form * *-->
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- This form is pre-integrated with SB Forms.-->
+                <!-- To make this form functional, sign up at-->
+                <!-- https://startbootstrap.com/solution/contact-forms-->
+                <!-- to get an API token!-->
+                <form [formGroup]="formGroup" (ngSubmit)="handleFormSubmit($event)" id="inquiryForm" data-sb-form-api-token="API_TOKEN">
+                    <div class="row align-items-stretch mb-5">
+                        <div class="col-md-6" style="margin: auto;">
+                            <div class="form-group">
+                                <!-- Name input-->
+                                <!-- <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div> -->
+                                <input class="form-control" id="name" type="text" placeholder="Your Name *" formControlName="inqName" />
+                                <div class="primaryColor" *ngIf="
+                                formGroup.controls['inqName'].invalid &&
+                                formGroup.controls['inqName'].touched
+                                " >A name is required.</div> 
+                                
+                            </div>
+                            <div class="form-group">
+                                
+                                <input class="form-control" id="email" type="email" placeholder="Your Email *" formControlName="inqEmail" />
+                                <div class="primaryColor" *ngIf="
+                                formGroup.controls['inqEmail'].invalid &&
+                                formGroup.controls['inqEmail'].touched
+                                ">Email is not valid.</div>
+                                <!-- <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div> -->
+                            </div>
+                            <div class="form-group">
+                                
+                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *: +971*********" formControlName="inqPhone" />
+                                <div class="primaryColor" *ngIf="
+                                formGroup.controls['inqPhone'].invalid &&
+                                formGroup.controls['inqPhone'].touched
+                                " >Phone number is not valid.</div>
+                            </div>
+                            <div class="form-group">
+                                
+                                <label for="service" class="text-white">Choose a service:</label>
+                                <select class="form-control" placeholder="select service" id="service" name="service" formControlName="inqService">
+                                    <option disabled selected [value]="null" value> -- select a service -- </option>
+                                    <optgroup *ngIf="businessSetup$.value as businessSetup" label="Business Set-Up">
+                                        
+                                        <option *ngFor="let service of businessSetup" [value]="service.name" value="{{service.name}}">{{service.name}}</option>
+                                    </optgroup>
+                                    <optgroup *ngIf="businessServices$.value as businessServices" label="Business Services">
+                                        <option *ngFor="let service of businessServices" [value]="service.name" value="{{service.name}}">{{service.name}}</option>
+                                    </optgroup>
+                                  </select>
+                                  <div class="primaryColor" *ngIf="
+                                formGroup.controls['inqService'].invalid &&
+                                formGroup.controls['inqService'].touched
+                                " >A service is required.</div>
+                            
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6" style="margin: auto;">
+                                <div class="form-group form-group-textarea mb-md-0">
+                                   
+                                    <textarea class="form-control" id="note" placeholder="Your Notes *" formControlName="inqNote"></textarea>
+                                    <!-- <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div> -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <ng-container *ngIf="state$.value.inqFormError">
+                        <!-- Component error -->
+                        <h3 class="text-danger" style="text-align: center;">{{ state$.value.inqFormError }}</h3>
+                        <!-- Component error -->
+                    </ng-container>
+                    
+                    <div class="text-center"><div *ngIf="state$.value.inqFormLoading" class="loader"></div><button *ngIf="!state$.value.inqFormLoading" class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">Send Inquiry</button></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- About-->
+       
+        <!-- Team-->
+        <!-- <section class="page-section bg-light" id="team">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="..." />
+                            <h4>Parveen Anand</h4>
+                            <p class="text-muted">Lead Designer</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="..." />
+                            <h4>Diana Petersen</h4>
+                            <p class="text-muted">Lead Marketer</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
+                            <h4>Larry Parker</h4>
+                            <p class="text-muted">Lead Developer</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
+                </div>
+            </div>
+        </section> -->
+        <!-- Clients-->
+        <section class="page-section" id="about" style="background-color: color(srgb 0.695 0.1112 0.2405 / 0.07);">
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-sm-12" style="justify-content: center;display: flex;">
+                    <img style="object-fit:contain;max-width: 90%;" src="../../../assets/img/about.jpg" alt="Italian Trulli">
+                </div>
+                <div class="col-lg-7 col-md-12 col-sm-12" style="justify-content: center;display: flex;">
+                    <div style="max-width: 90%;padding-top: 30px;">
+                        <h2 class="section-heading text-uppercase">About</h2>
+                        <h3 class="section-subheading">AskBizi is a Dubai-based company with a dedicated team of professionals with years of experience in business setup and business consultancy.</h3>
+                        <h5 class="section-subheading">We are committed to providing our clients with the best possible service and support. We pride ourselves on transparency, ethics and professionalism. 
+                            Our team of experienced professionals are always eager to help you with everything from setting up your business to growing it and expanding into new markets.
+                            </h5>
+                        <h5 class="section-subheading">AskBizi offers a wide range of services to help businesses of all sizes including: </h5>
+                        <ul>
+                            <li>Trade License Issuance</li>
+                            <li>Feasibility Study Services</li>
+                            <li> Visa & PRO Services</li>
+                            <li>FDA Registration</li>
+                            <li>MOHRE Services</li>
+                            <li>Customs Services</li>
+                            <!-- <li>Attestation Services</li> -->
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <!-- <div class="py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-3 col-sm-6 my-3">
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/microsoft.svg" alt="..." aria-label="Microsoft Logo" /></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 my-3">
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/google.svg" alt="..." aria-label="Google Logo" /></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 my-3">
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/facebook.svg" alt="..." aria-label="Facebook Logo" /></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 my-3">
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/ibm.svg" alt="..." aria-label="IBM Logo" /></a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- Contact-->
+        <section class="page-section bg" id="contact">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Contact Us</h2>
+                    <h3 class="section-subheading text-white">for any further information, feel free to contact us, we will contact you as soon as possible.</h3>
+                </div>
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- * * SB Forms Contact Form * *-->
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- This form is pre-integrated with SB Forms.-->
+                <!-- To make this form functional, sign up at-->
+                <!-- https://startbootstrap.com/solution/contact-forms-->
+                <!-- to get an API token!-->
+                <form [formGroup]="contactFormGroup" (ngSubmit)="handleContactFormSubmit($event)" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                    <div class="row align-items-stretch mb-5">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- Name input-->
+                                <input class="form-control" id="name" type="text" placeholder="Your Name *" formControlName="cntName" />
+                                <div class="primaryColor" *ngIf="
+                                contactFormGroup.controls['cntName'].invalid &&
+                                contactFormGroup.controls['cntName'].touched
+                                " >A name is required.</div> 
+
+                                <!-- <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div> -->
+                            </div>
+                            <div class="form-group">
+                                <!-- Email address input-->
+                                <input class="form-control" id="email" type="email" placeholder="Your Email *" formControlName="cntEmail" />
+                                <div class="primaryColor" *ngIf="
+                                contactFormGroup.controls['cntEmail'].invalid &&
+                                contactFormGroup.controls['cntEmail'].touched
+                                " >Email is not valid.</div>
+                            </div>
+                            <div class="form-group mb-md-0">
+                                <!-- Phone number input-->
+                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *: +971*********" formControlName="cntPhone" />
+                                <div class="primaryColor" *ngIf="
+                                contactFormGroup.controls['cntPhone'].invalid &&
+                                contactFormGroup.controls['cntPhone'].touched
+                                " >Phone number is not valid.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-textarea mb-md-0">
+                                <!-- Message input-->
+                                <textarea class="form-control" id="message" placeholder="Your Message *" formControlName="cntMsg"></textarea>
+                                <div class="primaryColor" *ngIf="
+                                contactFormGroup.controls['cntMsg'].invalid &&
+                                contactFormGroup.controls['cntMsg'].touched
+                                " >Message is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Submit success message-->
+                    <!---->
+                    <!-- This is what your users will see when the form-->
+                    <!-- has successfully submitted-->
+                    <ng-container *ngIf="state$.value.contactFormError">
+                        <!-- Component error -->
+                        <h3 class="text-danger" style="text-align: center;">{{ state$.value.contactFormError }}</h3>
+                        <!-- Component error -->
+                    </ng-container>
+                    <!-- Submit error message-->
+                    <!---->
+                    <!-- This is what your users will see when there is-->
+                    <!-- an error submitting the form-->
+                    <!-- <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div> -->
+                    <!-- Submit Button-->
+                    <div class="text-center"><div *ngIf="state$.value.contactFormLoading" class="loader"></div><button *ngIf="!state$.value.contactFormLoading" class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">Send Message</button></div>
+                    <!-- <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">Send Message</button></div> -->
+                </form>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-start">Copyright &copy; AskBizi 2023</div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Portfolio Modals-->
+        <!-- Portfolio item 1 modal popup-->
+        <!-- <div *ngIf="businessSetup$.value as businessSetup">
+            <div *ngFor="let service of businessSetup" class="portfolio-modal modal fade" id="bsetup{{service.uid}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="modal-body">
+                                       
+                                        <h2 class="text-uppercase">{{service.name}}</h2>
+                                        <p class="item-intro text-muted">{{service.name}}</p>
+                                        <div>
+                                            <img class="img-fluid d-block mx-auto" style="background-color: gray;padding: 49px;" src="{{service.icon}}" alt="..." />
+                                        </div>
+                                        
+                                        <p>{{service.desc}}</p>
+                                      
+                                        <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                            <i class="fas fa-add me-1"></i>
+                                            Create inquiry
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="businessServices$.value as businessServices">
+            <div *ngFor="let service of businessServices" class="portfolio-modal modal fade" id="bser{{service.uid}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="modal-body">
+                                       
+                                        <h2 class="text-uppercase">{{service.name}}</h2>
+                                        <p class="item-intro text-muted">{{service.name}}</p>
+                                        <div>
+                                            <img class="img-fluid d-block mx-auto" style="background-color: gray;padding: 49px;" src="{{service.icon}}" alt="..." />
+                                        </div>
+                                        
+                                        <p>{{service.desc}}</p>
+                                       
+                                        <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                            <i class="fas fa-add me-1"></i>
+                                            Create inquiry
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+
+
+       
+            <div [ngStyle]="{display: bsModalShow ? 'block' : 'none'}" [ngClass]="bsModalShow ? 'portfolio-modal modal fade show' : 'portfolio-modal modal fade' " id="seriveModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="close-modal" (click)="closePopup()" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="modal-body" *ngIf="modalService as service">
+                                       <!-- Project details-->
+                                       <h2 class="text-uppercase">{{service.name}}</h2>
+                                       <!-- <p class="item-intro text-muted">{{service.name}}</p> -->
+                                       <div style="margin: 60px 0px;">
+                                           <img class="img-fluid d-block mx-auto" style="background-color: color(srgb 0.7372 0.7486 0.76 / 0.88);padding: 10px;max-width: 35%;" src="{{service.icon}}" alt="..." />
+                                       </div>
+                                       <div style="text-align: left;" [innerHTML]="service.desc"></div>
+                                       <!-- <p>{{service.desc}}</p> -->
+                                       <!-- <ul class="list-inline">
+                                           <li>
+                                               <strong>Client:</strong>
+                                               Threads
+                                           </li>
+                                           <li>
+                                               <strong>Category:</strong>
+                                               Business Set-Up
+                                           </li>
+                                       </ul> -->
+                                       <button style="margin-top: 25px;" (click)="goToInquiry()" class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                           <i class="fas fa-add me-1"></i>
+                                           Send inquiry
+                                       </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="bsModalShow" class="modal-backdrop fade show"></div>
+      
+        <!-- Portfolio item 2 modal popup-->
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
+    </body>
+</html>

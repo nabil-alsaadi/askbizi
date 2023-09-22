@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "askbizi",
+    "staging": "askbizitest-f0039"
+  },
+  "targets": {},
+  "etags": {}
+}

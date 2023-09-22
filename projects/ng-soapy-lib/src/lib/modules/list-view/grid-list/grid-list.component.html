@@ -1,0 +1,22 @@
+<mat-grid-list
+  *ngIf="cardTemplate"
+  [cols]="columns"
+  [rowHeight]="aspectRatio"
+  [gutterSize]="gutterSize"
+>
+<ng-container *ngIf="dataSource?.connect() | async as data">
+    <div class="row">
+      <div class="col-sm-12">
+        <lib-grid-list-sort [keys]="sortKeys"></lib-grid-list-sort>
+      </div>
+    </div>
+    <ng-container *ngFor="let dataItem of data">
+      <mat-grid-tile>
+        <ng-container
+          [ngTemplateOutlet]="cardTemplate"
+          [ngTemplateOutletContext]="{ data: dataItem }"
+        ></ng-container>
+      </mat-grid-tile>
+    </ng-container>
+  </ng-container>
+</mat-grid-list>

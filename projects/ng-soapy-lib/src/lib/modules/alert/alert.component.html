@@ -1,0 +1,11 @@
+<div *ngFor="let alert of alerts" class="{{ cssClass(alert) }}">
+  <a class="close alertBtn" style="cursor: pointer" (click)="removeAlert(alert)"
+    >&times;</a
+  >
+  <span [innerHTML]="alert.message"></span>
+  <div *ngIf="alert.sound">
+    <audio autoplay>
+      <source [src]="soundAlert" />
+    </audio>
+  </div>
+</div>

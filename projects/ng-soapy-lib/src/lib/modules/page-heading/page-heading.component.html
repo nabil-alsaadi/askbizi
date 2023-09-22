@@ -1,0 +1,49 @@
+<div class="container-fluid px-4 mt-0 mb-4 border-bottom">
+  <div class="row py-4">
+    <div class="col-12 col-sm-6">
+      <div class="d-flex align-items-center">
+        <button
+          *ngIf="!hideBackButton"
+          mat-icon-button
+          (click)="goBackHandler($event)"
+        >
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <div class="d-flex align-items-center">
+          <ng-container
+            *ngIf="prefixTemplate"
+            [ngTemplateOutlet]="prefixTemplate"
+          ></ng-container>
+          <div
+            [ngClass]="{
+              'ms-2': prefixTemplate
+            }"
+          >
+            <div
+              *ngIf="superTitle"
+              class="h3 m-0 text-muted"
+              style="line-height: 1rem"
+            >
+              {{ superTitle | uppercase }}
+            </div>
+            <div *ngIf="title" class="h2 m-0" style="line-height: 1.4em">
+              {{ title | titlecase }}
+            </div>
+            <div *ngIf="subtitle" class="h4 m-0">
+              {{ subtitle | titlecase }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 d-flex align-items-center">
+      <div class="ms-sm-auto">
+        <ng-container
+          *ngIf="actionsTemplate"
+          [ngTemplateOutlet]="actionsTemplate"
+        >
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

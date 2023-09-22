@@ -3,34 +3,114 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ASK_BIZI": {
+
+    "askbizi": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "",
-      "sourceRoot": "src",
+      "schematics": {},
+      "root": "projects/askbizi",
+      "sourceRoot": "projects/askbizi/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ask-bizi",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
-            "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "outputPath": "dist/askbizi",
+            "index": "projects/askbizi/src/index.html",
+            "main": "projects/askbizi/src/main.ts",
+            "polyfills": "projects/askbizi/src/polyfills.ts",
+            "tsConfig": "projects/askbizi/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/askbizi/src/favicon.ico",
+              "projects/askbizi/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "projects/askbizi/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "4mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4mb",
+                  "maximumError": "4mb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "askbizi:build:production"
+            },
+            "development": {
+              "browserTarget": "askbizi:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "askbizi:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": "projects/askbizi/src/polyfills.ts",
+            "tsConfig": "projects/askbizi/tsconfig.spec.json",
+            "assets": [
+              "projects/askbizi/src/favicon.ico",
+              "projects/askbizi/src/assets"
+            ],
+            "styles": [
+              "projects/askbizi/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "ng-soapy-lib": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ng-soapy-lib",
+      "sourceRoot": "projects/ng-soapy-lib/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ng-soapy-lib",
+            "index": "projects/ng-soapy-lib/src/index.html",
+            "main": "projects/ng-soapy-lib/src/main.ts",
+            "polyfills": "projects/askbizi/src/polyfills.ts",
+            "tsConfig": "projects/ng-soapy-lib/tsconfig.app.json",
+            "assets": [
+              "projects/ng-soapy-lib/src/favicon.ico",
+              "projects/ng-soapy-lib/src/assets"
+            ],
+            "styles": [
+              "projects/ng-soapy-lib/src/styles.css"
             ],
             "scripts": []
           },
@@ -65,10 +145,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ASK_BIZI:build:production"
+              "browserTarget": "ng-soapy-lib:build:production"
             },
             "development": {
-              "browserTarget": "ASK_BIZI:build:development"
+              "browserTarget": "ng-soapy-lib:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,29 +156,26 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ASK_BIZI:build"
+            "browserTarget": "ng-soapy-lib:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
+            "polyfills": "projects/askbizi/src/polyfills.ts",
+            "tsConfig": "projects/ng-soapy-lib/tsconfig.spec.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/ng-soapy-lib/src/favicon.ico",
+              "projects/ng-soapy-lib/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "projects/ng-soapy-lib/src/styles.css"
             ],
             "scripts": []
           }
         }
       }
     }
-  }
+  },
+  "defaultProject": "askbizi"
 }

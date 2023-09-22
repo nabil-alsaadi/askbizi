@@ -1,0 +1,11 @@
+<ng-container>
+  <div class="d-flex align-items-center h-100" [matMenuTriggerFor]="logOutMenu">
+    <a href="javascript:void(0)" class="nav-link" dropdownToggle>
+      <fa-icon [icon]="logOut" class="text-white"></fa-icon>
+    </a>
+  </div>
+
+  <mat-menu #logOutMenu="matMenu">
+    <button mat-menu-item (click)="logOutHandler($event)">LogOut</button>
+  </mat-menu>
+</ng-container>

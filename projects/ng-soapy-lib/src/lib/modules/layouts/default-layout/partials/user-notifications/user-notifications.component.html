@@ -1,0 +1,14 @@
+<ng-container>
+  <div
+    class="d-flex align-items-center h-100"
+    [matMenuTriggerFor]="notificationsMenu"
+  >
+    <a href="javascript:void(0)" class="nav-link" dropdownToggle>
+      <fa-icon [icon]="notificationIcon" class="text-white"></fa-icon>
+    </a>
+  </div>
+
+  <mat-menu #notificationsMenu="matMenu">
+    <button mat-menu-item>Notification</button>
+  </mat-menu>
+</ng-container>

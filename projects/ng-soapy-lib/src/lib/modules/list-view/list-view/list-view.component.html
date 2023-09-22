@@ -1,0 +1,66 @@
+<div class="row mb-2" *ngIf="allowStyleChange">
+  <div class="col-sm-12">
+    <div class="row d-md-flex justify-content-end align-items-top">
+      <!-- actions template -->
+      <ng-container
+        *ngIf="actionsTemplate"
+        [ngTemplateOutlet]="actionsTemplate"
+      ></ng-container>
+      <div
+        libCollapsible
+        class="col-sm-12"
+        class="col-sm-12"
+        [isAnimated]="true"
+        [collapse]="!state$.value.showFilters"
+      >
+        <ng-container
+          [ngTemplateOutlet]="filtersTemplate"
+          *ngIf="filtersTemplate"
+        ></ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="state$.value.listStyle === 'grid' && cardTemplate">
+  <div class="col-sm-12">
+    <lib-grid-list
+      [dataSource]="listViewDataSource"
+      [cardTemplate]="cardTemplate"
+      [columns]="gridColumns"
+      [aspectRatio]="gridAspectRatio"
+      [gutterSize]="gridGapSize"
+      [sortKeys]="sortKeys"
+    ></lib-grid-list>
+  </div>
+</div>
+
+<div class="row" *ngIf="state$.value.listStyle === 'table'">
+  <div class="col-sm-12">
+    <lib-table
+      class="no-page-label"
+      [customTemplates]="tableCustomCardsTemplates"
+      [dataSource]="listViewDataSource"
+      [dataKeys]="dataKeys"
+      [visibleKeys]="visibleKeys$.value"
+      [headerHidden]="tableHeaderHidden"
+      [actionsTemplate]="tableActionsTemplate"
+      [usePaginator]="usePaginator"
+    ></lib-table>
+  </div>
+</div>
+
+<div *ngIf="state$.value.error">
+  <div class="row">
+    <div class="col-sm-12 text-center text-danger">
+      {{ "unable to load data" | titlecase }}
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="state$.value.loading">
+  <div class="col-sm-12">
+    <div class="d-flex justify-content-center">
+      <mat-spinner [diameter]="10"></mat-spinner>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+Layout
+<div
+  class="mat-main-container"
+  [class.mat-main-container-mobile]="mobileQuery.matches"
+>
+  <mat-sidenav-container class="mat-sidenav-container">
+    <mat-sidenav
+      #sideNav
+      class="mat-start-sidenav dark-theme"
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      [opened]="mobileQuery.matches ? false : true"
+      style="background-color: #333"
+    >
+      <mat-nav-list>
+        <ng-container *ngFor="let menu of sidebarMenu">
+          <a class="px-4" href="javascript:void(0);" mat-list-item>
+            {{ menu.label }}
+          </a>
+          <a
+            mat-list-item
+            class="px-4"
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            *ngFor="let item of menu.children"
+          >
+            <fa-icon
+              class="me-2"
+              *ngIf="item.icon"
+              [icon]="item.icon"
+            ></fa-icon>
+            {{ item.title }}
+          </a>
+        </ng-container>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar class="mat-toolbar" color="primary">
+        <mat-toolbar-row>
+          <button mat-icon-button (click)="sideNav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <app-nav-logo></app-nav-logo>
+          <app-user-notifications></app-user-notifications>
+          <span class="flexExpand"></span>
+          <div>
+            <app-logout></app-logout>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <div
+        [ngStyle]="{
+          marginTop: mobileQuery.matches ? '8rem' : '0rem'
+        }"
+        style="padding-bottom: 8rem"
+        class="pt-lg-0 pt-md-3 pt-0"
+      >
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

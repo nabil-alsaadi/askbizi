@@ -1,0 +1,21 @@
+<ng-container *ngIf="keys && Object.keys(keys).length > 0">
+  <div class="d-flex align-items-center">
+    <form [formGroup]="formGroup">
+      <mat-form-field appearance="fill" class="me-2">
+        <mat-label>Sort by</mat-label>
+        <mat-select formControlName="sort">
+          <mat-option *ngFor="let key of keys | keyvalue" [value]="key.key">
+            {{ key.value.label | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Order</mat-label>
+        <mat-select formControlName="order">
+          <mat-option value="asc">Ascending</mat-option>
+          <mat-option value="desc">Descending</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+</ng-container>

@@ -1,0 +1,212 @@
+<ng-container *ngIf="dataSource">
+  <div>
+    <div [ngClass]="{ 'd-none': dataSource.error$.value }">
+      <div class="w-100" style="overflow: auto">
+        <table
+          *ngIf="!dataSource.error$.value"
+          class="w-100"
+          mat-table
+          matSort
+          [attr.cdkDropList]="sortable"
+          [dataSource]="dataSource"
+          (cdkDropListDropped)="dropHandler($event)"
+          (matSortChange)="sortChangeHandler($event)"
+        >
+          <!-- <div [ngClass]="{ 'd-none': !dataSource.loading$.value }"> -->
+          <ng-container *ngIf="dataKeys$ | async as dataKeys">
+            <ng-container
+              *ngFor="let key of visibleKeys$.value; let i = index"
+              [matColumnDef]="key"
+              [sticky]="i === 0"
+            >
+              <ng-container
+                *ngIf="
+                  dataKeys[key].sortable === undefined ||
+                  dataKeys[key].sortable === true
+                "
+              >
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                  style="white-space: nowrap"
+                >
+                  {{ dataKeys[key].label | titlecase }}
+                </th>
+              </ng-container>
+              <ng-container *ngIf="dataKeys[key].sortable === false">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  style="white-space: nowrap"
+                >
+                  {{ dataKeys[key].label | titlecase }}
+                </th>
+              </ng-container>
+              <ng-container
+                *ngIf="
+                  dataKeys[key].type === 'template' &&
+                  dataKeys[key].templateName &&
+                  customTemplates &&
+                  customTemplates.length > 0
+                "
+              >
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  [ngClass]="{
+                    'px-1': dataKeys[key].noPadding,
+                    'pe-4': !dataKeys[key].noPadding
+                  }"
+                  [ngStyle]="{
+                    width: dataKeys[key].noPadding ? 0 : 'auto'
+                  }"
+                >
+                  <ng-container
+                    [ngTemplateOutlet]="
+                      getTemplateForAttribute(dataKeys[key].templateName)
+                    "
+                    [ngTemplateOutletContext]="{ data: element }"
+                  ></ng-container>
+                </td>
+              </ng-container>
+              <ng-container
+                *ngIf="dataKeys[key].type === 'actions' && actionsTemplate"
+              >
+                <td mat-cell *matCellDef="let element">
+                  <div class="ms-auto">
+                    <ng-container
+                      [ngTemplateOutlet]="actionsTemplate"
+                      [ngTemplateOutletContext]="{ data: element }"
+                    ></ng-container>
+                  </div>
+                </td>
+              </ng-container>
+              <ng-container *ngIf="dataKeys[key].type === 'string'">
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  style="white-space: nowrap"
+                  class="pe-4"
+                >
+                  <a
+                    *ngIf="dataKeys[key]?.routerLink"
+                    [routerLink]="
+                      dataKeys[key]?.routerLink?.concat(element.uid)
+                    "
+                  >
+                    {{ (resolveObjectKey(key, element) | titlecase) ?? "-" }}
+                  </a>
+                  <span *ngIf="!dataKeys[key]?.routerLink">
+                    {{ (resolveObjectKey(key, element) | titlecase) ?? "-" }}
+                  </span>
+                </td>
+              </ng-container>
+              <ng-container *ngIf="dataKeys[key].type === 'date'">
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  style="white-space: nowrap"
+                  class="pe-4"
+                >
+                  {{ resolveObjectKey(key, element) | date: "dd-MM-yyyy" }}
+                </td>
+              </ng-container>
+              <ng-container *ngIf="dataKeys[key].type === 'date-timeago'">
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  style="white-space: nowrap"
+                  class="pe-4"
+                >
+                  {{ (resolveObjectKey(key, element) | amTimeAgo) ?? "-" }}
+                </td>
+              </ng-container>
+              <ng-container *ngIf="dataKeys[key].type === 'timestamp'">
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  style="white-space: nowrap"
+                  class="pe-4"
+                >
+                  {{
+                    getDate(resolveObjectKey(key, element)) | date: "dd-MM-yyyy"
+                  }}
+                </td>
+              </ng-container>
+              <ng-container *ngIf="dataKeys[key].type === 'timestamp-timeago'">
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  style="white-space: nowrap"
+                  class="pe-4"
+                >
+                  {{
+                    (resolveObjectKey(key, element)?.toDate() | amTimeAgo) ??
+                      "-"
+                  }}
+                </td>
+              </ng-container>
+              <ng-container *ngIf="dataKeys[key].type === 'boolean'">
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  style="white-space: nowrap"
+                  class="pe-4"
+                >
+                  <div
+                    class="text-success mx-1"
+                    *ngIf="resolveObjectKey(key, element)"
+                  >
+                    <fa-icon [icon]="activeIcon"></fa-icon>
+                  </div>
+                  <div
+                    class="text-danger mx-1"
+                    *ngIf="!resolveObjectKey(key, element)"
+                  >
+                    <fa-icon [icon]="inactiveIcon"></fa-icon>
+                  </div>
+                </td>
+              </ng-container>
+              <ng-container
+                *ngIf="
+                  dataKeys[key].type !== 'actions' &&
+                  dataKeys[key].type !== 'string' &&
+                  dataKeys[key].type !== 'date' &&
+                  dataKeys[key].type !== 'boolean'
+                "
+              >
+                <td mat-cell *matCellDef="let element">
+                  {{ resolveObjectKey(key, element) ?? "-" }}
+                </td>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="!headerHidden">
+            <tr mat-header-row *matHeaderRowDef="visibleKeys$.value"></tr>
+          </ng-container>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: visibleKeys$.value"
+            [attr.cdkDrag]="sortable"
+          ></tr>
+          <!-- </div> -->
+        </table>
+        <mat-paginator
+          *ngIf="usePaginator"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          [showFirstLastButtons]="showFirstLastButtons"
+          [length]="dataSource.total$.value"
+        >
+        </mat-paginator>
+      </div>
+      <!-- <div [ngClass]="{ invisible: !dataSource.loading$.value }" class="w-100">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div> -->
+    </div>
+    <ng-container *ngIf="dataSource.error$.value">
+      <h3 class="text-danger">{{ dataSource.error$.value }}</h3>
+    </ng-container>
+  </div>
+</ng-container>

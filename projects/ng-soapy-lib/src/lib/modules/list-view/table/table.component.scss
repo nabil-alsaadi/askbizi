@@ -1,0 +1,36 @@
+.mat-row:hover .mat-cell {
+  background-color: #eee;
+}
+
+:host.no-page-label
+  ::ng-deep
+  .mat-paginator
+  > .mat-paginator-outer-container
+  > .mat-paginator-container
+  > .mat-paginator-range-actions
+  > .mat-paginator-range-label {
+  display: none;
+}
+
+::ng-deep {
+  mat-option[ng-reflect-value="1000"]:before {
+    content: "All";
+    float: left;
+    text-transform: none;
+    top: 0px;
+    position: relative;
+  }
+
+  mat-option[ng-reflect-value="1000"] .mat-option-text {
+    display: none;
+    position: relative;
+  }
+
+  mat-select[ng-reflect-value="1000"] .mat-select-value-text span {
+    display: none;
+  }
+
+  mat-select[ng-reflect-value="1000"] .mat-select-value-text:after {
+    content: "All";
+  }
+}

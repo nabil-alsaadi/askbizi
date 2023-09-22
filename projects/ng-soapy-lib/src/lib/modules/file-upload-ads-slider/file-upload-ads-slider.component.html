@@ -1,0 +1,50 @@
+<div class="flex-column rounded py-5 text-center" style="border: 1px dashed">
+  <input
+    #fileSelector
+    class="visually-hidden"
+    type="file"
+    [multiple]="multiple"
+    [accept]="acceptExtensions"
+    (change)="onFileChange($event)"
+  />
+  <button
+    mat-flat-button
+    type="button"
+    *ngIf="showBrowserButton"
+    (click)="onBrowse()"
+  >
+    <fa-icon class="me-2" [icon]="download"></fa-icon>
+    {{ title }}
+  </button>
+  <div *ngIf="!showBrowserButton" (click)="onBrowse()">
+    <ng-content></ng-content>
+  </div>
+
+  <ng-container *ngFor="let file of selectedFiles; let index = index">
+    <div class="row py-2">
+      <div class="col-sm-12">
+        <div class="d-flex flex-column" *ngIf="showProgressBar">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <div class="me-2">
+              <fa-icon class="me-2" [icon]="fileIcon(file.type)"></fa-icon>
+              <span>{{ file.name | truncateTextWithExtension: 30 }}</span>
+            </div>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="deleteFileHandler(index)"
+            >
+              <div class="d-flex align-items-center">
+                <mat-icon>delete_outline</mat-icon>
+              </div>
+            </button>
+          </div>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="uploadProgress[index]"
+          ></mat-progress-bar>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

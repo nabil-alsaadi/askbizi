@@ -11,16 +11,20 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "paths": {
+      "ng-soapy-lib": ["projects/ng-soapy-lib/src/public-api"],
+      "soapy-types": ["projects/ng-soapy-lib/src/lib/interfaces"]
+    },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
+    "target": "es2017",
+    "module": "es2020",
     "useDefineForClassFields": false,
     "lib": [
-      "ES2022",
+      "es2020",
       "dom"
     ]
   },
