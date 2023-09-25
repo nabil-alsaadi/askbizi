@@ -38,6 +38,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContactService } from './components/home/services/contact-service.service';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 let resolvePersistenceEnabled: (enabled: boolean) => void;
 export const persistenceEnabled = new Promise<boolean>((resolve) => {
   resolvePersistenceEnabled = resolve;
@@ -48,7 +49,8 @@ export const persistenceEnabled = new Promise<boolean>((resolve) => {
     AppComponent,
     NewClaimComponent,
     HomeComponent,
-    ComingSoonComponent
+    ComingSoonComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

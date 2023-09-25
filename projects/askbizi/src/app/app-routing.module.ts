@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 import { HomeComponent } from './components/home/home.component';
 import { NewClaimComponent } from './components/new-claim/new-claim.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/home', pathMatch: 'full' },
+  // { path: '**', redirectTo: '', pathMatch: 'full' },
   { path: '', component: HomeComponent },
-  { path: 'new-claim', component: NewClaimComponent },
-  { path: 'coming-soon', component: ComingSoonComponent },
+  { path: 'privacy', component: PrivacyComponent},
+  // { path: 'new-claim', component: NewClaimComponent },
+  // { path: 'coming-soon', component: ComingSoonComponent },
 ];
 
 
